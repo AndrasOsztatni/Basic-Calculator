@@ -1,7 +1,7 @@
 from tkinter import *
 import math
 import tkinter.font as tkfont
-import matplotlib.pyplot as plt
+
 #structure of the calculator
 root = Tk()
 root.title("Calculator")
@@ -97,7 +97,7 @@ def div():
         e.insert(0, "Error")
 
 #functions for action buttons
-def clear():
+def clear(event=None):
     global answer
     e.delete(0, END)
     answer=""
@@ -139,7 +139,7 @@ def point():
         e.insert(0, "Error")
 
 
-def eq():
+def eq(event=None):
     try:
         eval(e.get())
         final = eval(e.get())
@@ -154,8 +154,9 @@ def eq():
         except:
             e.delete(0, END)
             e.insert(0, "Error")
+e.bind("<Return>", eq)
+e.bind("<Delete>", clear)
 
-    
 #number buttons
 button_1 = Button(frame, width=6, height=1, pady=10, text="1",relief="flat", bg="#33b876",activebackground="#55da98",  font=calcFont, fg="#006321", activeforeground="#007432", command=lambda:buttonClick(1))
 button_2 = Button(frame, width=6, height=1, pady=10, text="2",relief="flat", bg="#33b876",activebackground="#55da98",  font=calcFont, fg="#006321", activeforeground="#007432",command=lambda:buttonClick(2))
@@ -185,9 +186,6 @@ button_clr = Button(frame, width=12, padx=6, height=1, pady=10, text="Clear", re
 button_bsp = Button(frame, width=6, height=1, pady=10, text="←", relief="flat", bg="#33b876", activebackground="#55da98", font=calcFont, fg="#006321", command=backspace)
 button_sign = Button(frame, width=6, height=1, pady=10, text="(-)", relief="flat", bg="#33b876", activebackground="#55da98", font=calcFont, fg="#006321", command=sign)
 button_point = Button(frame, width=6, height=1, pady=10, text=".", relief="flat", bg="#33b876", activebackground="#55da98", font=calcFont, fg="#006321", command=point)
-
-
-
 
 #grid for number buttons 
 button_1.grid(row=4, column=0)
